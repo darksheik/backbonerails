@@ -1,0 +1,65 @@
+@import compass_twitter_bootstrap
+
+#container
+  +fixed-container
+  +columns(14)
+  +offset(1)
+  margin-top: 1em
+
+header.page-header
+  h1
+    margin-bottom: 0
+    small
+      margin-top: 10px
+      display: block
+      margin-bottom: 10px
+      color: $gray
+
+#content
+  section
+    h2
+      margin-bottom: 10px
+
+#favorites
+  img
+    width: 100px
+    height: 100px
+  input
+    @extend .medium, .danger
+    +columns(1)
+    float: left
+    margin-left: 5px
+    margin-right: 20px
+  p
+    font-size: 18px
+    color: $gray
+  ul
+    li
+      display: block
+
+#search
+  +columns(13.65)
+  background: image_url('/assets/search.png') no-repeat 770px
+  height: 50px
+  font-size: 2em
+  margin-top: 30px
+  margin-bottom: 45px
+  padding-left: 15px
+
+#search-results
+  display: block
+  input
+    @extend .medium, .primary
+    +columns(1)
+    float: left
+    margin-left: 5px
+    margin-right: 20px
+  img
+    width: 100px
+    height: 100px
+
+footer
+  small
+    color: $gray
+    float: left
+  text-align: right

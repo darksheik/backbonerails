@@ -1,0 +1,11 @@
+- unless defined?(resource)
+  - resource = image
+
+- button_text = resource.new_record? ? '+' : '-'
+
+%li
+  = form_for resource, :method => method do |form|
+    = link_to 'javascript:void(0)' do
+      = image_tag image.url
+    = form.hidden_field :url, :value => image.url
+    = form.submit button_text, :class => 'btn'

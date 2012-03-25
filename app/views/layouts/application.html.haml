@@ -1,0 +1,25 @@
+!!! 5
+%html
+  %head
+    %title Image Thingy
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body
+    #container
+      %header.page-header
+        %h1 
+          %a{:href => '/'} Image Thingy
+          %small A little diddy that lets you search for and save your favorite images
+
+      #content
+        = yield
+
+      %footer
+        %small 
+          powered by 
+          %a{:href => 'http://rubyonrails.org'} rails
+          +
+          %a{:href => 'http://documentcloud.github.com/backbone'} backbone
+        %a{:href => 'http://30cubits.com'}
+          %img{:src => 'http://f.cl.ly/items/3F0N3P1R410n031Q271a/logo-small.png', :alt => '30 Cubits'}

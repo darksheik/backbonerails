@@ -1,0 +1,41 @@
+%section#favorites
+  %h2 My Favs
+  %p{:style => "#{display_style_for(@favorites)}"} 
+    No favorites yet?  Man, you're picky!
+  %ul.media-grid
+    = render :partial => '/home/image', 
+             :collection => @favorites, 
+             :locals => { :method => :delete }
+
+%hr
+
+= form_tag root_path do
+  = text_field_tag :search, @term
+
+%hr
+
+%section#search-results
+  %h2 Search Results
+  %ul.media-grid
+    = render :partial => '/home/image', 
+             :collection => @results, 
+             :locals => { :method => :create, :resource => Favorite.new }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%script{:id => 'image-template', :type => 'text/html'}
+  %a{:href => 'javascript:void(0)'}
+    %img{:src => '{{model.url}}'}
+  %input.btn{:type => 'submit', :value => '{{button_text}}'}
