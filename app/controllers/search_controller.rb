@@ -5,7 +5,10 @@ class SearchController < ApplicationController
     @term = params[:term]
     @results = get_results
 
-    render 'home/index'
+    respond_to do |format|
+      format.html { render 'home/index' }
+      format.json { render :json => @results }
+    end
   end
 
   private

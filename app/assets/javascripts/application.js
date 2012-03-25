@@ -10,7 +10,7 @@
 // Bootstrapping Backbone.js Application
 
 $(function() { 
-  //App.start(); 
+  App.start(); 
 });
 
 App = {
@@ -42,7 +42,7 @@ App.Router = Backbone.Router.extend({
 
 App.SearchController = {
   search: function(term) {
-    // TODO
+    App.searchResults.fetch(term);
   }
 };
 
@@ -69,7 +69,17 @@ App.SearchView = Backbone.View.extend({
 })
 
 App.SearchResultsView = Backbone.View.extend({
-  el: '#search-results'
+  el: '#search-results',
+  initialize: function() {
+    App.searchResults.bind('reset', this.render, this);
+  },
+  render: function(collection) {
+    collection.each(function(model) {
+      var view = new App.SearchResultView({model:model})
+      var result = view.render();
+      this.$('ul').append(result);
+    }, this)
+  }
 });
 
 App.SearchResultView = Backbone.View.extend({
@@ -127,7 +137,16 @@ App.FavoriteView = Backbone.View.extend({
 // Models/Collections
 
 App.SearchResult = Backbone.Model.extend({});
-App.SearchResultList = Backbone.Collection.extend({});
+App.SearchResultList = Backbone.Collection.extend({
+  model: App.SearchResult,
+  url: function() {
+    return '/search/' + this.term;
+  },
+  fetch: function(term) {
+    this.term = term;
+    Backbone.Collection.prototype.fetch.call(this);
+  }
+});
 App.searchResults = new App.SearchResultList();
 
 App.Favorite = Backbone.Model.extend({});
